@@ -53,7 +53,7 @@ export class LikeEventManager {
         const containerY = this.app.screen.height / 2 - 100
         const containerX = this.app.screen.width / 2
 
-        const usernameText = new PIXI.Text(`(-${data.likeCount}HP) ${data.nickname}`, textStyle)
+        const usernameText = new PIXI.Text(`🗡️(-${data.likeCount}💔) ${data.nickname}`, textStyle)
         usernameText.anchor.set(0.5)
         usernameText.x = containerX
         usernameText.y = containerY
