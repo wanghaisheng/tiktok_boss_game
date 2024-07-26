@@ -35,6 +35,7 @@ export class Monster extends PIXI.utils.EventEmitter {
             this.healthBar = new HealthBar(this, this.app)
         })
 
+        return this
     }
 
     damage(amount: number): number {

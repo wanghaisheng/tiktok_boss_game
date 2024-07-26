@@ -15,16 +15,20 @@ export class MonsterManager {
         this.monsters = monsters
         this.currentMonsterIndex = 0
         this.currentMonster = this.monsters[this.currentMonsterIndex]
-        this.currentMonster.on('died', this.switchToNextMonster.bind(this)) // Listen for the 'died' event
-        this.currentMonster.spawn()
+        this.spawnMonster(this.currentMonster)
     }
 
+    spawnMonster(monster: Monster) {
+        monster.spawn().on('died', this.switchToNextMonster.bind(this))
+    }
 
     switchToNextMonster() {
         this.currentMonsterIndex++
+        console.log('Switching to next monster', this.currentMonsterIndex);
+
+        this.currentMonster = this.monsters[this.currentMonsterIndex]
         if (this.currentMonsterIndex < this.monsters.length) {
-            this.currentMonster = this.monsters[this.currentMonsterIndex]
-            this.currentMonster.spawn()
+            this.spawnMonster(this.currentMonster)
         }
     }
 }

@@ -18,7 +18,7 @@ export class Game {
 
         const monsters = [
             new Monster('Bunny', 2, 'https://pixijs.com/assets/bunny.png', this.app),
-            new Monster('Monster', 1500, 'https://pixijs.com/assets/eggHead.png', this.app),
+            new Monster('Monster', 3, 'https://pixijs.com/assets/eggHead.png', this.app),
             new Monster('Alien', 2500, 'https://pixijs.com/assets/flowerTop.png', this.app),
         ]
 
