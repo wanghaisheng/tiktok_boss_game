@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 let tiktok = null as WebcastPushConnection | null
 
 io.on('connection', (socket) => {
-    console.log('a user connected')
+    console.log('Game Client connected')
 
     const tiktokUsername = socket.handshake.query.u as string
     if (!tiktokUsername) {
@@ -32,9 +32,11 @@ io.on('connection', (socket) => {
 
     tiktok = new WebcastPushConnection(tiktokUsername)
 
+    console.log(`Connecting to TikTok live stream of ${tiktokUsername}...`);
+
     tiktok.connect().then(() => {
 
-        console.log(`Connected to TikTok live stream of ${tiktokUsername}`)
+        console.log(`Successfully connected to ${tiktokUsername}`)
 
         tiktok.on('chat', (data) => {
             io.emit('chat', data)
@@ -66,7 +68,7 @@ io.on('connection', (socket) => {
     })
 
     socket.on('disconnect', () => {
-        console.log('user disconnected')
+        console.log('Game Client Disconnected')
         tiktok.disconnect()
     })
 })
