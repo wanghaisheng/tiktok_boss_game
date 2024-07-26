@@ -1,21 +1,21 @@
 import * as PIXI from 'pixi.js'
-import type { Game } from './game'
+import { Monster } from './monster'
 
 export class HealthBar {
-    game: Game
     app: PIXI.Application
     container: PIXI.Container
     healthBar: PIXI.Graphics
     healthBarBorder: PIXI.Graphics
     healthBarText: PIXI.Text
+    monster: Monster
 
-    constructor(game: Game, initialX?: number, initialY?: number) {
-        this.game = game
-        this.app = game.app
+    constructor(monster: Monster, app: PIXI.Application) {
+        this.app = app
+        this.monster = monster
         this.container = new PIXI.Container()
 
-        initialX = initialX ?? this.app.screen.width / 2 - 100
-        initialY = initialY ?? this.game.sprites[this.game.currentMonsterIndex].y - this.game.sprites[this.game.currentMonsterIndex].height / 2 - 100
+        const initialX = this.app.screen.width / 2 - 100
+        const initialY = this.monster.sprite.y - this.monster.sprite.height / 2 - 100
 
         this.healthBar = new PIXI.Graphics()
         this.healthBar.beginFill(0xff0000)
@@ -32,7 +32,7 @@ export class HealthBar {
         this.healthBarBorder.y = initialY
         this.container.addChild(this.healthBarBorder)
 
-        this.healthBarText = new PIXI.Text(`${(this.game.currentMonster.hp - this.game.currentMonster.damageTaken).toLocaleString()} HP`, {
+        this.healthBarText = new PIXI.Text(`${(this.monster.hp - this.monster.damageTaken).toLocaleString()} HP`, {
             fontFamily: 'Arial',
             fontSize: 24,
             fill: 0xffffff,
@@ -48,22 +48,12 @@ export class HealthBar {
 
     updateHealth(percentage: number): this {
         this.healthBar.scale.x = Math.max(percentage, 0)
-        this.healthBarText.text = `${(this.game.currentMonster.hp - this.game.currentMonster.damageTaken).toLocaleString()} HP`
+        this.healthBarText.text = `${(this.monster.hp - this.monster.damageTaken).toLocaleString()} HP`
         return this
     }
 
-    reposition(newX: number, newY: number): this {
-        this.healthBar.x = newX
-        this.healthBar.y = newY
-        this.healthBarBorder.x = newX
-        this.healthBarBorder.y = newY
-        this.healthBarText.x = newX + 100
-        this.healthBarText.y = newY + 10
-        return this
-    }
 
-    reset(): this {
-        this.updateHealth(1)
-        return this
+    destroy() {
+        this.app.stage.removeChild(this.container)
     }
 }
