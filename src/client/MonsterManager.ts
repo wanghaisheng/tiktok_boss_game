@@ -26,8 +26,8 @@ export class MonsterManager {
         this.currentMonsterIndex++
         console.log('Switching to next monster', this.currentMonsterIndex);
 
-        this.currentMonster = this.monsters[this.currentMonsterIndex]
         if (this.currentMonsterIndex < this.monsters.length) {
+            this.currentMonster = this.monsters[this.currentMonsterIndex]
             this.spawnMonster(this.currentMonster)
         }
     }
