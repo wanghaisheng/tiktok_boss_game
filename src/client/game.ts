@@ -3,6 +3,7 @@ import { Monster } from './monster'
 import { io } from 'socket.io-client'
 import { LikeEventManager } from './LikeEventManager'
 import { MonsterManager } from './MonsterManager'
+import { Bigfoot } from './monsters/bigfoot/bigfoot'
 
 export class Game {
     app: PIXI.Application
@@ -21,9 +22,8 @@ export class Game {
         document.body.appendChild(this.app.canvas)
 
         const monsters = [
-            new Monster('Bunny', 2, 'https://pixijs.com/assets/bunny.png', this.app),
-            new Monster('Monster', 30, 'https://pixijs.com/assets/eggHead.png', this.app),
-            new Monster('Alien', 10000, 'https://pixijs.com/assets/flowerTop.png', this.app),
+            new Bigfoot(this.app),
+            new Bigfoot(this.app),
         ]
 
         this.monsterManager = new MonsterManager(this.app, monsters)

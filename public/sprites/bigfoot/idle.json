@@ -1,0 +1,520 @@
+{
+  "frames": {
+    "__brown_bigfoot_idle_010.png": {
+      "frame": {
+        "x": 10,
+        "y": 10,
+        "w": 416,
+        "h": 664
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 544,
+        "y": 220,
+        "w": 416,
+        "h": 664
+      },
+      "sourceSize": {
+        "w": 1344,
+        "h": 965
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "__brown_bigfoot_idle_009.png": {
+      "frame": {
+        "x": 10,
+        "y": 694,
+        "w": 415,
+        "h": 663
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 545,
+        "y": 221,
+        "w": 415,
+        "h": 663
+      },
+      "sourceSize": {
+        "w": 1344,
+        "h": 965
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "__brown_bigfoot_idle_008.png": {
+      "frame": {
+        "x": 10,
+        "y": 1377,
+        "w": 412,
+        "h": 661
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 547,
+        "y": 223,
+        "w": 412,
+        "h": 661
+      },
+      "sourceSize": {
+        "w": 1344,
+        "h": 965
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "__brown_bigfoot_idle_012.png": {
+      "frame": {
+        "x": 442,
+        "y": 1377,
+        "w": 412,
+        "h": 661
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 547,
+        "y": 223,
+        "w": 412,
+        "h": 661
+      },
+      "sourceSize": {
+        "w": 1344,
+        "h": 965
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "__brown_bigfoot_idle_011.png": {
+      "frame": {
+        "x": 445,
+        "y": 694,
+        "w": 414,
+        "h": 663
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 546,
+        "y": 221,
+        "w": 414,
+        "h": 663
+      },
+      "sourceSize": {
+        "w": 1344,
+        "h": 965
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "__brown_bigfoot_idle_007.png": {
+      "frame": {
+        "x": 874,
+        "y": 1377,
+        "w": 410,
+        "h": 660
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 549,
+        "y": 224,
+        "w": 410,
+        "h": 660
+      },
+      "sourceSize": {
+        "w": 1344,
+        "h": 965
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "__brown_bigfoot_idle_013.png": {
+      "frame": {
+        "x": 446,
+        "y": 10,
+        "w": 410,
+        "h": 659
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 549,
+        "y": 225,
+        "w": 410,
+        "h": 659
+      },
+      "sourceSize": {
+        "w": 1344,
+        "h": 965
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "__brown_bigfoot_idle_006.png": {
+      "frame": {
+        "x": 876,
+        "y": 10,
+        "w": 408,
+        "h": 658
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 551,
+        "y": 226,
+        "w": 408,
+        "h": 658
+      },
+      "sourceSize": {
+        "w": 1344,
+        "h": 965
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "__brown_bigfoot_idle_014.png": {
+      "frame": {
+        "x": 879,
+        "y": 688,
+        "w": 408,
+        "h": 658
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 551,
+        "y": 226,
+        "w": 408,
+        "h": 658
+      },
+      "sourceSize": {
+        "w": 1344,
+        "h": 965
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "__brown_bigfoot_idle_005.png": {
+      "frame": {
+        "x": 1304,
+        "y": 10,
+        "w": 405,
+        "h": 656
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 553,
+        "y": 228,
+        "w": 405,
+        "h": 656
+      },
+      "sourceSize": {
+        "w": 1344,
+        "h": 965
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "__brown_bigfoot_idle_015.png": {
+      "frame": {
+        "x": 1304,
+        "y": 1366,
+        "w": 405,
+        "h": 656
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 553,
+        "y": 228,
+        "w": 405,
+        "h": 656
+      },
+      "sourceSize": {
+        "w": 1344,
+        "h": 965
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "__brown_bigfoot_idle_004.png": {
+      "frame": {
+        "x": 1307,
+        "y": 686,
+        "w": 403,
+        "h": 654
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 555,
+        "y": 230,
+        "w": 403,
+        "h": 654
+      },
+      "sourceSize": {
+        "w": 1344,
+        "h": 965
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "__brown_bigfoot_idle_016.png": {
+      "frame": {
+        "x": 1729,
+        "y": 10,
+        "w": 403,
+        "h": 654
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 555,
+        "y": 230,
+        "w": 403,
+        "h": 654
+      },
+      "sourceSize": {
+        "w": 1344,
+        "h": 965
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "__brown_bigfoot_idle_003.png": {
+      "frame": {
+        "x": 1729,
+        "y": 1360,
+        "w": 404,
+        "h": 653
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 554,
+        "y": 231,
+        "w": 404,
+        "h": 653
+      },
+      "sourceSize": {
+        "w": 1344,
+        "h": 965
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "__brown_bigfoot_idle_017.png": {
+      "frame": {
+        "x": 1730,
+        "y": 684,
+        "w": 404,
+        "h": 653
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 554,
+        "y": 231,
+        "w": 404,
+        "h": 653
+      },
+      "sourceSize": {
+        "w": 1344,
+        "h": 965
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "__brown_bigfoot_idle_002.png": {
+      "frame": {
+        "x": 2153,
+        "y": 10,
+        "w": 404,
+        "h": 650
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 554,
+        "y": 233,
+        "w": 404,
+        "h": 650
+      },
+      "sourceSize": {
+        "w": 1344,
+        "h": 965
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "__brown_bigfoot_idle_018.png": {
+      "frame": {
+        "x": 2577,
+        "y": 10,
+        "w": 404,
+        "h": 650
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 554,
+        "y": 233,
+        "w": 404,
+        "h": 650
+      },
+      "sourceSize": {
+        "w": 1344,
+        "h": 965
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "__brown_bigfoot_idle_001.png": {
+      "frame": {
+        "x": 2153,
+        "y": 1357,
+        "w": 404,
+        "h": 648
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 553,
+        "y": 235,
+        "w": 404,
+        "h": 648
+      },
+      "sourceSize": {
+        "w": 1344,
+        "h": 965
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "__brown_bigfoot_idle_019.png": {
+      "frame": {
+        "x": 2154,
+        "y": 680,
+        "w": 404,
+        "h": 648
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 553,
+        "y": 235,
+        "w": 404,
+        "h": 648
+      },
+      "sourceSize": {
+        "w": 1344,
+        "h": 965
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "__brown_bigfoot_idle_000.png": {
+      "frame": {
+        "x": 2577,
+        "y": 1348,
+        "w": 404,
+        "h": 647
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 553,
+        "y": 236,
+        "w": 404,
+        "h": 647
+      },
+      "sourceSize": {
+        "w": 1344,
+        "h": 965
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  },
+  "animations": {
+    "idle": [
+      "__brown_bigfoot_idle_000.png",
+      "__brown_bigfoot_idle_001.png",
+      "__brown_bigfoot_idle_002.png",
+      "__brown_bigfoot_idle_003.png",
+      "__brown_bigfoot_idle_004.png",
+      "__brown_bigfoot_idle_005.png",
+      "__brown_bigfoot_idle_006.png",
+      "__brown_bigfoot_idle_007.png",
+      "__brown_bigfoot_idle_008.png",
+      "__brown_bigfoot_idle_009.png",
+      "__brown_bigfoot_idle_010.png",
+      "__brown_bigfoot_idle_011.png",
+      "__brown_bigfoot_idle_012.png",
+      "__brown_bigfoot_idle_013.png",
+      "__brown_bigfoot_idle_014.png",
+      "__brown_bigfoot_idle_015.png",
+      "__brown_bigfoot_idle_016.png",
+      "__brown_bigfoot_idle_017.png",
+      "__brown_bigfoot_idle_018.png",
+      "__brown_bigfoot_idle_019.png"
+    ]
+  },
+  "meta": {
+    "app": "http://free-tex-packer.com",
+    "version": "0.6.7",
+    "image": "idle.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 2991,
+      "h": 2048
+    },
+    "scale": 2,
+    "animationSpeed": 0.2
+  }
+}

@@ -2,33 +2,32 @@ import * as PIXI from 'pixi.js'
 import { HealthBar } from './healthBar'
 import { EventEmitter } from 'eventemitter3'
 
+export interface MonsterState {
+    idle: string
+    damaged: string
+    killed: string
+}
+
 export class Monster extends EventEmitter {
     name: string
     hp: number
-    textureUrl: string
     damageTaken: number
     killed: boolean
-    sprite: PIXI.Sprite
+    sprite: PIXI.AnimatedSprite | undefined
+    sprites: { [key: string]: string }
     app: PIXI.Application
     healthBar: HealthBar
 
-    constructor(name: string, hp: number, textureUrl: string, app: PIXI.Application) {
+    constructor(app: PIXI.Application) {
         super()
-        this.name = name
-        this.hp = hp
-        this.textureUrl = textureUrl
         this.damageTaken = 0
         this.killed = false
         this.app = app
     }
 
-    spawn() {
-        this.sprite = new PIXI.Sprite(PIXI.Texture.from(this.textureUrl))
-        this.sprite.anchor.set(0.5)
-        this.sprite.x = this.app.screen.width / 2
-        this.sprite.y = this.app.screen.height / 2 + 20
+    async spawn() {
+        this.setSprite('idle')
         this.sprite.interactive = true
-        this.sprite.buttonMode = true
         this.sprite.cursor = 'pointer'
         this.sprite.on('pointerdown', () => this.damage(1))
         this.app.stage.addChild(this.sprite)
@@ -37,7 +36,7 @@ export class Monster extends EventEmitter {
         return this
     }
 
-    damage(amount: number): number {
+    damage(amount: number) {
         const damageWillKill = this.damageTaken + amount >= this.hp
 
         if (damageWillKill) {
@@ -52,12 +51,19 @@ export class Monster extends EventEmitter {
     }
 
     kill() {
+        if (this.killed) {
+            return
+        }
+
         this.damageTaken = this.hp
         this.healthBar.updateHealth(0)
         this.killed = true
-        this.sprite.visible = false
-        this.healthBar.destroy()
-        this.emit('died')
+        this.setSprite('die', true, false).onComplete = () => {
+            this.sprite.visible = false
+            this.healthBar.destroy()
+
+            this.emit('died')
+        }
     }
 
     getHealthPercentage(): number {
@@ -88,5 +94,26 @@ export class Monster extends EventEmitter {
     reposition(x: number, y: number) {
         this.sprite.x = x
         this.sprite.y = y
+    }
+
+    setSprite(name:string, addToStage = false, loop = true) {
+        if (this.sprite) {
+            this.app.stage.removeChild(this.sprite)
+        }
+
+        const sheet = PIXI.Assets.get(this.sprites[name])
+        this.sprite = new PIXI.AnimatedSprite(sheet.animations[name])
+        this.sprite.anchor.set(0.5)
+        this.sprite.x = this.app.screen.width / 2
+        this.sprite.y = this.app.screen.height / 2 + 20
+        this.sprite.animationSpeed = sheet.data.meta.animationSpeed
+        this.sprite.play()
+        this.sprite.loop = loop
+
+        if (addToStage) {
+            this.app.stage.addChild(this.sprite)
+        }
+
+        return this.sprite
     }
 }

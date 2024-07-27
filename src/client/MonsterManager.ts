@@ -17,16 +17,17 @@ export class MonsterManager {
         this.currentMonsterIndex = 0
         this.currentMonster = this.monsters[this.currentMonsterIndex]
 
-        const assets = this.monsters.map(monster => monster.textureUrl);
+        // Load all monster sprites before starting the game
+        const sprites = this.monsters.map(monster => Object.values(monster.sprites)).flat()
 
-        PIXI.Assets.load(assets).then(resources => {
+        PIXI.Assets.load(sprites).then(resources => {
             this.setupUpNextList()
             this.spawnMonster(this.currentMonster)
         });
     }
 
-    spawnMonster(monster: Monster) {
-        monster.spawn().on('died', this.switchToNextMonster.bind(this))
+    async spawnMonster(monster: Monster) {
+        (await monster.spawn()).on('died', this.switchToNextMonster.bind(this))
     }
 
     switchToNextMonster() {
@@ -40,7 +41,65 @@ export class MonsterManager {
         }
     }
 
-    setupUpNextList() {
+    private createBoxContainer(monster: Monster, index: number): PIXI.Container {
+        const boxContainer = new PIXI.Container();
+        const box = new PIXI.Graphics()
+        box.rect(0, 0, 50, 50)
+
+        const sheet = PIXI.Assets.get(monster.sprites.idle)
+        const sprite = new PIXI.AnimatedSprite(sheet.animations.idle)
+        sprite.width = 50
+        sprite.height = 50
+        sprite.anchor.set(0.5)
+        sprite.x = 25
+        sprite.y = 25
+
+        boxContainer.addChild(box, sprite)
+
+        if (index < this.currentMonsterIndex) {
+            // Color the seen monsters red
+            sprite.tint = 0xA05252  // Red tint for current monster
+            // Add a question mark for hidden next bosses
+            const questionMark = new PIXI.Text({
+                text: '💀',
+                style: {
+                    fontFamily: 'Arial',
+                    fontSize: 19,
+                    fill: 0xFFFFFF,
+                    align: 'center',
+                }
+            })
+            questionMark.anchor.set(0.5)
+            questionMark.x = sprite.x
+            questionMark.y = sprite.y
+            boxContainer.addChild(questionMark)
+        } else if (index === this.currentMonsterIndex) {
+            // Highlight the current monster
+            sprite.tint = 0xFFFFFF // Reset any tint
+        } else {
+            // Set silhouette for upcoming monsters
+            sprite.tint = 0x000000
+
+            // Add a question mark for hidden next bosses
+            const questionMark = new PIXI.Text({
+                text: '?',
+                style: {
+                    fontFamily: 'Arial',
+                    fontSize: 24,
+                    fill: 0xFFFFFF,
+                    align: 'center',
+                }
+            })
+            questionMark.anchor.set(0.5)
+            questionMark.x = sprite.x
+            questionMark.y = sprite.y
+            boxContainer.addChild(questionMark)
+        }
+
+        return boxContainer;
+    }
+
+    private setupUpNextList() {
         this.upNextContainer = new PIXI.Container()
         const upNextContainerTitle = new PIXI.Container()
         this.upNextContainer.y = this.app.screen.height - 100 // Position at the bottom of the screen
@@ -62,105 +121,16 @@ export class MonsterManager {
         upNextContainerTitle.addChild(upNextTitle)
 
         this.monsters.forEach((monster, index) => {
-            const boxContainer = new PIXI.Container();
-            const box = new PIXI.Graphics()
-            box.rect(0, 0, 50, 50)
-
-            const sprite = new PIXI.Sprite(PIXI.Texture.from(monster.textureUrl))
-            sprite.width = 50
-            sprite.height = 50
-            sprite.anchor.set(0.5)
-            sprite.x = 25
-            sprite.y = 25
-
-            boxContainer.addChild(box, sprite)
-
-            if (index <= this.currentMonsterIndex) {
-                // Color the current and seen monsters
-                sprite.tint = 0xFFFFFF // Reset any tint
-            } else {
-                // Set silhouette for upcoming monsters
-                sprite.tint = 0x000000
-
-                // Add a question mark for hidden next bosses
-                const questionMark = new PIXI.Text({
-                    text: '?',
-                    style: {
-                        fontFamily: 'Arial',
-                        fontSize: 24,
-                        fill: 0xFFFFFF,
-                        align: 'center',
-                    }
-                })
-                questionMark.anchor.set(0.5)
-                questionMark.x = sprite.x
-                questionMark.y = sprite.y
-                boxContainer.addChild(questionMark)
-            }
-
+            const boxContainer = this.createBoxContainer(monster, index);
             boxContainer.x = index * 60 // Spacing between boxes
             this.upNextContainer.addChild(boxContainer)
         })
     }
 
-
-
-    updateUpNextList() {
+    private updateUpNextList() {
         this.upNextContainer.removeChildren()
         this.monsters.forEach((monster, index) => {
-            const boxContainer = new PIXI.Container();
-            const box = new PIXI.Graphics()
-            box.rect(0, 0, 50, 50)
-
-            const sprite = new PIXI.Sprite(PIXI.Texture.from(monster.textureUrl))
-            sprite.width = 50
-            sprite.height = 50
-            sprite.anchor.set(0.5)
-            sprite.x = 25
-            sprite.y = 25
-
-            boxContainer.addChild(box, sprite)
-
-            if (index < this.currentMonsterIndex) {
-                // Color the seen monsters red
-                sprite.tint = 0xA05252  // Red tint for current monster
-                // Add a question mark for hidden next bosses
-                const questionMark = new PIXI.Text({
-                    text: '💀',
-                    style: {
-                        fontFamily: 'Arial',
-                        fontSize: 19,
-                        fill: 0xFFFFFF,
-                        align: 'center',
-                    }
-                })
-                questionMark.anchor.set(0.5)
-                questionMark.x = sprite.x
-                questionMark.y = sprite.y
-                boxContainer.addChild(questionMark)
-            } else if (index === this.currentMonsterIndex) {
-                // Highlight the current monster
-                sprite.tint = 0xFFFFFF // Reset any tint
-            } else {
-                // Set silhouette for upcoming monsters
-                sprite.tint = 0x000000
-
-                // Add a question mark for hidden next bosses
-                const questionMark = new PIXI.Text({
-                    text: '?',
-                    style: {
-                        fontFamily: 'Arial',
-                        fontSize: 24,
-                        fill: 0xFFFFFF,
-                        align: 'center',
-                    }
-                })
-                questionMark.anchor.set(0.5)
-                questionMark.x = sprite.x
-                questionMark.y = sprite.y
-                boxContainer.addChild(questionMark)
-            }
-
+            const boxContainer = this.createBoxContainer(monster, index);
             boxContainer.x = index * 60 // Spacing between boxes
             this.upNextContainer.addChild(boxContainer)
         })
