@@ -12,14 +12,18 @@ export class Game {
     constructor() {
         console.log('Game started')
 
-        this.app = new PIXI.Application({ width: 700, height: 1080 })
-        this.app.renderer.backgroundColor = 0x1099bb
-        document.body.appendChild(this.app.view)
+        this.app = new PIXI.Application()
+        this.initialize()
+    }
+
+    async initialize() {
+        await this.app.init({ background: '#1099bb', resizeTo: window })
+        document.body.appendChild(this.app.canvas)
 
         const monsters = [
             new Monster('Bunny', 2, 'https://pixijs.com/assets/bunny.png', this.app),
             new Monster('Monster', 30, 'https://pixijs.com/assets/eggHead.png', this.app),
-            new Monster('Alien', 100, 'https://pixijs.com/assets/flowerTop.png', this.app),
+            new Monster('Alien', 10000, 'https://pixijs.com/assets/flowerTop.png', this.app),
         ]
 
         this.monsterManager = new MonsterManager(this.app, monsters)
@@ -36,4 +40,5 @@ export class Game {
             this.likeEventManager.addLikeEvent(data)
         })
     }
+
 }

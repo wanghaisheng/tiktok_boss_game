@@ -1,7 +1,8 @@
 import * as PIXI from 'pixi.js'
 import { HealthBar } from './healthBar'
+import { EventEmitter } from 'eventemitter3'
 
-export class Monster extends PIXI.utils.EventEmitter {
+export class Monster extends EventEmitter {
     name: string
     hp: number
     textureUrl: string
@@ -22,18 +23,16 @@ export class Monster extends PIXI.utils.EventEmitter {
     }
 
     spawn() {
-        PIXI.Loader.shared.add(this.name.toLowerCase(), this.textureUrl).load((loader, resources) => {
-            this.sprite = new PIXI.Sprite(resources[this.name.toLowerCase()].texture)
-            this.sprite.anchor.set(0.5)
-            this.sprite.x = this.app.screen.width / 2
-            this.sprite.y = this.app.screen.height / 2 + 20
-            this.sprite.interactive = true
-            this.sprite.buttonMode = true
-            this.sprite.cursor = 'pointer'
-            this.sprite.on('pointerdown', () => this.damage(1))
-            this.app.stage.addChild(this.sprite)
-            this.healthBar = new HealthBar(this, this.app)
-        })
+        this.sprite = new PIXI.Sprite(PIXI.Texture.from(this.textureUrl))
+        this.sprite.anchor.set(0.5)
+        this.sprite.x = this.app.screen.width / 2
+        this.sprite.y = this.app.screen.height / 2 + 20
+        this.sprite.interactive = true
+        this.sprite.buttonMode = true
+        this.sprite.cursor = 'pointer'
+        this.sprite.on('pointerdown', () => this.damage(1))
+        this.app.stage.addChild(this.sprite)
+        this.healthBar = new HealthBar(this, this.app)
 
         return this
     }

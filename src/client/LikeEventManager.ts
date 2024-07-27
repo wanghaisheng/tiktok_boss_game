@@ -53,7 +53,7 @@ export class LikeEventManager {
         const containerY = this.app.screen.height / 2 - 100
         const containerX = this.app.screen.width / 2
 
-        const usernameText = new PIXI.Text(`🗡️(-${data.likeCount}💔) ${data.nickname}`, textStyle)
+        const usernameText = new PIXI.Text({text: `🗡️(-${data.likeCount}💔) ${data.nickname}`, style: textStyle})
         usernameText.anchor.set(0.5)
         usernameText.x = containerX
         usernameText.y = containerY
@@ -66,9 +66,8 @@ export class LikeEventManager {
 
         // Create a circular mask for the profile picture
         const mask = new PIXI.Graphics()
-        mask.beginFill(0xffffff)
-        mask.drawCircle(0, 0, profilePic.width / 2)
-        mask.endFill()
+        mask.fill(0xffffff)
+        mask.circle(0, 0, profilePic.width / 2)
         mask.x = profilePic.x
         mask.y = profilePic.y
         profilePic.mask = mask

@@ -18,25 +18,27 @@ export class HealthBar {
         const initialY = this.monster.sprite.y - this.monster.sprite.height / 2 - 100
 
         this.healthBar = new PIXI.Graphics()
-        this.healthBar.beginFill(0xff0000)
-        this.healthBar.drawRect(0, 0, 200, 20)
-        this.healthBar.endFill()
+        this.healthBar.rect(0, 0, 200, 20)
+        this.healthBar.fill(0xff0000)
         this.healthBar.x = initialX
         this.healthBar.y = initialY
         this.container.addChild(this.healthBar)
 
         this.healthBarBorder = new PIXI.Graphics()
-        this.healthBarBorder.lineStyle(2, 0xffffff)
-        this.healthBarBorder.drawRect(0, 0, 200, 20)
+        this.healthBarBorder.rect(0, 0, 200, 20)
+        this.healthBarBorder.stroke({width: 2, color: 0xffffff})
         this.healthBarBorder.x = initialX
         this.healthBarBorder.y = initialY
         this.container.addChild(this.healthBarBorder)
 
-        this.healthBarText = new PIXI.Text(`${(this.monster.hp - this.monster.damageTaken).toLocaleString()} HP`, {
-            fontFamily: 'Arial',
-            fontSize: 24,
-            fill: 0xffffff,
-            align: 'center',
+        this.healthBarText = new PIXI.Text({
+            text: `${(this.monster.hp - this.monster.damageTaken).toLocaleString()} HP`,
+            style: {
+                fontFamily: 'Arial',
+                fontSize: 24,
+                fill: 0xffffff,
+                align: 'center',
+            }
         })
         this.healthBarText.anchor.set(0.5)
         this.healthBarText.x = initialX + 100
