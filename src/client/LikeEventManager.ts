@@ -43,7 +43,7 @@ export class LikeEventManager {
         processNext()
     }
 
-    private displayLikeEvent(data: any) {
+    private async displayLikeEvent(data: any) {
         const textStyle = new PIXI.TextStyle({
             fontFamily: 'Arial',
             fontSize: 24,
@@ -58,7 +58,9 @@ export class LikeEventManager {
         usernameText.x = containerX
         usernameText.y = containerY
 
-        const profilePic = PIXI.Sprite.from(data.profilePictureUrl)
+        // load the profile picture
+        const profilePicTexture = await PIXI.Assets.load(data.profilePictureUrl)
+        const profilePic = PIXI.Sprite.from(profilePicTexture)
         profilePic.anchor.set(0.5)
         profilePic.width = 30
         profilePic.height = 30
@@ -66,8 +68,8 @@ export class LikeEventManager {
 
         // Create a circular mask for the profile picture
         const mask = new PIXI.Graphics()
-        mask.fill(0xffffff)
         mask.circle(0, 0, profilePic.width / 2)
+        mask.fill(0xffffff)
         mask.x = profilePic.x
         mask.y = profilePic.y
         profilePic.mask = mask
