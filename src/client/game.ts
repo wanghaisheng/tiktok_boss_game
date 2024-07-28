@@ -3,7 +3,7 @@ import { Monster } from './monster'
 import { io } from 'socket.io-client'
 import { LikeEventManager } from './LikeEventManager'
 import { MonsterManager } from './MonsterManager'
-import { Bigfoot } from './monsters/bigfoot/bigfoot'
+import { Bigfoot } from './monsters/bigfoot'
 
 export class Game {
     app: PIXI.Application

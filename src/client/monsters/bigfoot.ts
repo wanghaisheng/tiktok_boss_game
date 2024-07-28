@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js'
-import { Monster } from '../../monster'
+import { Monster } from '../monster'
 
 export class Bigfoot extends Monster {
     constructor(app: PIXI.Application) {
