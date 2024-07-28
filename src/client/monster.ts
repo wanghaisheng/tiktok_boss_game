@@ -15,7 +15,6 @@ export class Monster extends EventEmitter {
 
     constructor(app: PIXI.Application) {
         super()
-        this.damageTaken = 0
         this.killed = false
         this.app = app
     }

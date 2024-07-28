@@ -22,14 +22,14 @@ export class Game {
         document.body.appendChild(this.app.canvas)
 
         const monsters = [
-            new Bigfoot(this.app),
+            new Bigfoot(this.app, 1026),
             new Bigfoot(this.app),
         ]
 
         this.monsterManager = new MonsterManager(this.app, monsters)
         this.likeEventManager = new LikeEventManager(this.app, this.monsterManager)
 
-        const socket = io('http://localhost:3000?u=tbell112')
+        const socket = io('http://localhost:3000?u=live_arcade_')
 
         socket.on('connect', () => {
             console.log('Connected to server')

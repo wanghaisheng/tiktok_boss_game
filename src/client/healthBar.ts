@@ -28,6 +28,7 @@ export class HealthBar {
         this.healthBar.rect(0, 0, 200, 24)
         this.healthBar.fill(0x00CC00)
         this.healthBar.x = initialX
+        this.healthBar.scale.x = Math.max(monster.getHealthPercentage(), 0)
         this.healthBar.y = initialY
         this.container.addChild(this.healthBar)
 
