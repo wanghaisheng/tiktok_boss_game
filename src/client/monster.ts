@@ -2,12 +2,6 @@ import * as PIXI from 'pixi.js'
 import { HealthBar } from './healthBar'
 import { EventEmitter } from 'eventemitter3'
 
-export interface MonsterState {
-    idle: string
-    damaged: string
-    killed: string
-}
-
 export class Monster extends EventEmitter {
     name: string
     hp: number
@@ -17,6 +11,7 @@ export class Monster extends EventEmitter {
     sprites: { [key: string]: string }
     app: PIXI.Application
     healthBar: HealthBar
+    inDamageState: boolean
 
     constructor(app: PIXI.Application) {
         super()
@@ -27,9 +22,6 @@ export class Monster extends EventEmitter {
 
     async spawn() {
         this.setSprite('idle')
-        this.sprite.interactive = true
-        this.sprite.cursor = 'pointer'
-        this.sprite.on('pointerdown', () => this.damage(1))
         this.app.stage.addChild(this.sprite)
         this.healthBar = new HealthBar(this, this.app)
 
@@ -37,6 +29,10 @@ export class Monster extends EventEmitter {
     }
 
     damage(amount: number) {
+        if (this.killed) {
+            return 0
+        }
+
         const damageWillKill = this.damageTaken + amount >= this.hp
 
         if (damageWillKill) {
@@ -44,9 +40,9 @@ export class Monster extends EventEmitter {
         } else {
             this.damageTaken += amount
             this.healthBar.updateHealth(this.getHealthPercentage())
+            this.animateDamage()
         }
 
-        this.animateDamage()
         return this.hp - this.damageTaken
     }
 
@@ -58,9 +54,11 @@ export class Monster extends EventEmitter {
         this.damageTaken = this.hp
         this.healthBar.updateHealth(0)
         this.killed = true
+
         this.setSprite('die', true, false).onComplete = () => {
             this.sprite.visible = false
             this.healthBar.destroy()
+            this.sprite.destroy()
 
             this.emit('died')
         }
@@ -75,6 +73,16 @@ export class Monster extends EventEmitter {
     }
 
     animateDamage() {
+        if (!this.inDamageState) {
+            this.inDamageState = true
+            this.setSprite('damaged', true, false).onComplete = () => {
+                this.inDamageState = false
+                if (!this.killed) {
+                    this.setSprite('idle', true, true)
+                }
+            }
+        }
+
         const originalScaleX = 1
         const originalScaleY = 1
 
@@ -87,18 +95,10 @@ export class Monster extends EventEmitter {
         }, 100)
     }
 
-    setVisible(visible: boolean) {
-        this.sprite.visible = visible
-    }
-
-    reposition(x: number, y: number) {
-        this.sprite.x = x
-        this.sprite.y = y
-    }
-
     setSprite(name:string, addToStage = false, loop = true) {
         if (this.sprite) {
             this.app.stage.removeChild(this.sprite)
+            this.sprite.destroy()
         }
 
         const sheet = PIXI.Assets.get(this.sprites[name])
@@ -109,6 +109,12 @@ export class Monster extends EventEmitter {
         this.sprite.animationSpeed = sheet.data.meta.animationSpeed
         this.sprite.play()
         this.sprite.loop = loop
+
+        if (name !== 'die') {
+            this.sprite.interactive = true
+            this.sprite.cursor = 'pointer'
+            this.sprite.on('pointerdown', () => this.damage(1))
+        }
 
         if (addToStage) {
             this.app.stage.addChild(this.sprite)
