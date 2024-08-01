@@ -1,6 +1,6 @@
 # Simple Interactive TikTok Live game
 When a viewer likes the stream, the boss takes damage.
-Fun weekend project using [TikTok-Live-Connector](https://github.com/zerodytrash/TikTok-Live-Connector)
+Fun weekend project using [TikTok-Live-Connector](https://github.com/zerodytrash/TikTok-Live-Connector) and [Pixijs](https://github.com/pixijs/pixijs)
 
 ![tiktokgame](https://github.com/user-attachments/assets/f7eba16c-36cf-4076-9292-4a85765a7713)
 
